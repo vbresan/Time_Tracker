@@ -1,0 +1,39 @@
+5.0 (2024.10.xx)
+
+* targeting SDK version 34
+
+
+4.0.1 (2019.08.02)
+
+* moving ad to the top of the screen
+
+
+4.0 (2019.08.01)
+
+* removing Flurry analytics
+
+
+3.0.1 (2013.06.30)
+
+* showing title bar
+* handling number overflow
+
+
+3.0 (2013.06.11)
+
+* build with latest Android version (4.2)
+* allowing installation on SD card
+* adding new version of AdMob library (6.2.1)
+* adding Flurry analytics (3.1.0)
+* program crash bug fix (rare)
+* adding proprietary 'About' library
+* adding proprietary auto-update library
+* adding launcher icon for higher resolutions
+* showing a toast message when trying to modify running activity
+* adding option for showing seconds
+* enabling editing of recorded times
+
+
+2.1.1 (2011.02.03)
+
+* program crash bugfix (rare)

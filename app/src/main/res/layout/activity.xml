@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@layout/rounded"
+    android:clickable="true"
+    android:focusable="true" >
+
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/TextViewName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1.0"
+            android:textColor="@color/WhiteColor"
+            android:textSize="20dp"
+            android:textStyle="bold" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/TextViewCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/StartCount"
+            android:textColor="@color/WhiteColor"
+            android:textSize="20dp"
+            android:textStyle="bold" >
+        </TextView>
+
+        <ImageView
+            android:id="@+id/ImageViewHourGlass"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/hour_glass"
+            android:visibility="invisible" >
+        </ImageView>
+    </LinearLayout>
+
+</LinearLayout>

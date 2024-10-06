@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Time Tracker</string>
+    <string name="Activity">Activity</string>
+    <string name="Add">Add</string>
+    <string name="Group">Group:</string>
+    <string name="Total">Total:</string>
+    
+    <string name="StartCount">00:00</string>
+    
+    <string name="RunningActivity">Can not modify running activity</string>
+    <string name="InvalidTimeFormat">Invalid time format</string>
+    
+</resources>

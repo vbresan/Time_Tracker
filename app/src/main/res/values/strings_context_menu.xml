@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="EditTime">Edit time</string>
+    <string name="RemoveFromList">Remove from list</string>
+    <string name="DeletePermanently">Delete permanently</string>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item 
+        android:title="@string/ResetAll" 
+        android:id="@+id/optionsMenuItemResetAll"
+        android:icon="@android:drawable/ic_menu_close_clear_cancel"  
+    />
+    <item 
+        android:title="@string/Settings" 
+        android:id="@+id/optionsMenuItemSettings"
+        android:icon="@android:drawable/ic_menu_preferences" 
+    />
+    <!-- 
+    <item 
+        android:title="@string/About" 
+        android:id="@+id/optionsMenuItemAbout"
+        android:icon="@android:drawable/ic_menu_info_details" 
+    />
+    -->
+</menu>
