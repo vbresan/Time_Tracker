@@ -18,7 +18,7 @@ still shows errors:
 
 ```
 ERROR @ line 32: <filter> is not supported
-ERROR @ line 32: <feGaussianBlur> is not supported 
+ERROR @ line 40: <feGaussianBlur> is not supported 
 ```
 
 Unlike the previous attempt, the shadow is now visible, though it lacks the 
