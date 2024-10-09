@@ -28,9 +28,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.material.color.DynamicColors;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -55,7 +58,7 @@ import biz.binarysolutions.timetracker.util.Pair;
  * 
  *
  */
-public class MainActivity extends android.app.Activity {
+public class MainActivity extends AppCompatActivity {
 	
 	//private static final int REFRESH_DELAY_MINUTES = 60 * 1000;
 	private static final int REFRESH_DELAY_SECONDS = 200;
@@ -560,7 +563,9 @@ public class MainActivity extends android.app.Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);
+
+		DynamicColors.applyToActivityIfAvailable(this);
 	    setContentView(R.layout.main);
 	    
 	    new GetDateTask(this).execute();

@@ -1,48 +1,28 @@
 package biz.binarysolutions.timetracker;
 
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.color.DynamicColors;
+
+import biz.binarysolutions.timetracker.preferences.PreferenceFragment;
 
 /**
  * 
  *
  */
-public class PreferencesActivity extends PreferenceActivity 
-	implements OnSharedPreferenceChangeListener {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
-        addPreferencesFromResource(R.xml.preferences);
-    }
+public class PreferencesActivity extends AppCompatActivity {
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		
-		getPreferenceScreen().
-    		getSharedPreferences().
-    			registerOnSharedPreferenceChangeListener(this);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		DynamicColors.applyToActivityIfAvailable(this);
+
+		getSupportFragmentManager()
+			.beginTransaction()
+			.replace(android.R.id.content, new PreferenceFragment())
+			.commit();
 	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		
-        getPreferenceScreen().
-    		getSharedPreferences().
-    			unregisterOnSharedPreferenceChangeListener(this); 		
-	}
-
-	@Override
-	public void onSharedPreferenceChanged
-		(
-				SharedPreferences sharedPreferences, 
-				String            key
-		) {
-		// do nothing
-	}	
 }
