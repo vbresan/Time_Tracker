@@ -1,0 +1,1 @@
+Time Tracker keeps track of the time you spend on any task. Find out where your time has gone.
