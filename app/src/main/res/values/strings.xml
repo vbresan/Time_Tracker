@@ -10,5 +10,7 @@
     
     <string name="RunningActivity">Can not modify running activity</string>
     <string name="InvalidTimeFormat">Invalid time format</string>
+
+    <string name="HourglassIcon">Hourglass icon</string>
     
 </resources>

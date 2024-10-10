@@ -14,8 +14,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
 import android.view.ViewParent;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -63,27 +61,26 @@ public class MainActivity extends AppCompatActivity {
 	//private static final int REFRESH_DELAY_MINUTES = 60 * 1000;
 	private static final int REFRESH_DELAY_SECONDS = 200;
 	
-	private int refreshDelay = REFRESH_DELAY_SECONDS;
+	private final int refreshDelay = REFRESH_DELAY_SECONDS;
 	
 	
-	private Integer currentGroupId = Integer.valueOf(0);
-	private LinkedHashMap<Integer, View> groups = 
-		new LinkedHashMap<Integer, View>();
+	private Integer currentGroupId = 0;
+	private final LinkedHashMap<Integer, View> groups = new LinkedHashMap<>();
 	
-	private SuggestList      suggestList       = new SuggestList();
-	private DisplayableGroup currentActivities = new DisplayableGroup();
+	private final SuggestList      suggestList       = new SuggestList();
+	private final DisplayableGroup currentActivities = new DisplayableGroup();
 	
 	private TotalActivity     totalActivity   = null;
 	private TrackableActivity trackedActivity = null;
 	
 	private LinearLayout longClickedView = null;
 	
-	private Handler updateHandler = new Handler();
+	private final Handler updateHandler = new Handler();
 	
 	/**
 	 * 
 	 */
-	private Runnable refreshCountersTask = new Runnable() {
+	private final Runnable refreshCountersTask = new Runnable() {
 		
 		@Override
 		public void run() {
@@ -197,35 +194,32 @@ public class MainActivity extends AppCompatActivity {
 		
 		View activityView = trackable.getView();
 		registerForContextMenu(activityView);
-		activityView.setOnClickListener(new OnClickListener() {
+		activityView.setOnClickListener(view -> {
 
-			@Override
-			public void onClick(View view) {
-				
-				if (trackedActivity == null) {
-					
+			if (trackedActivity == null) {
+
+				startTracking(trackable);
+				trackedActivity = trackable;
+
+			} else {
+
+				stopTracking(trackedActivity);
+
+				if (view != trackedActivity.getView()) {
 					startTracking(trackable);
 					trackedActivity = trackable;
-					
 				} else {
-					
-					stopTracking(trackedActivity);
-					
-					if (view != trackedActivity.getView()) {
-						startTracking(trackable);
-						trackedActivity = trackable;					
-					} else {
-						trackedActivity = null;
-					}
+					trackedActivity = null;
 				}
 			}
 		});
 		
 		View group = groups.get(groupId);
-		LinearLayout parent = 
-			(LinearLayout) group.findViewById(R.id.LinearLayoutActivities);
-		parent.addView(activityView);
-		
+		if (group != null) {
+			LinearLayout parent = group.findViewById(R.id.linearLayoutActivities);
+			parent.addView(activityView);
+		}
+
 		currentActivities.put(activityView, trackable);
 		suggestList.remove(trackable.getName());
 		refreshEditTextAdapter();
@@ -242,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
 	private void addNewCurrentActivity() {
 		
 		String activityName = getEditTextString();
-		if (activityName != null && activityName.length() > 0) {
+		if (activityName.length() > 0) {
 			
 			if (! currentActivities.containsActivity(activityName)) {
 				
@@ -260,15 +254,10 @@ public class MainActivity extends AppCompatActivity {
 	 */
 	private String getEditTextString() {
 
-		EditText editText = 
-			(EditText) findViewById(R.id.AutoCompleteTextViewActivity);
-		
-		String string = editText.getText().toString();
-		if (string != null) {
-			string = string.trim();
-		}
-		
-		return string;
+		EditText editText = findViewById(R.id.autoCompleteTextViewActivity);
+		String   string   = editText.getText().toString();
+
+		return string.trim();
 	}
 	
 	/**
@@ -287,8 +276,7 @@ public class MainActivity extends AppCompatActivity {
 	 */
 	private void clearEditText() {
 		
-		EditText editText = 
-			(EditText) findViewById(R.id.AutoCompleteTextViewActivity);
+		EditText editText = findViewById(R.id.autoCompleteTextViewActivity);
 		
 		editText.setText("");
 		editText.clearFocus();
@@ -301,35 +289,15 @@ public class MainActivity extends AppCompatActivity {
 	 */
 	private void setEditTextOnKeyListener() {
 
-		AutoCompleteTextView editText = (AutoCompleteTextView) 
-			findViewById(R.id.AutoCompleteTextViewActivity);
+		AutoCompleteTextView editText = findViewById(R.id.autoCompleteTextViewActivity);
 		
-		editText.setOnKeyListener(new OnKeyListener() {
+		editText.setOnKeyListener((view, keyCode, event) -> {
 
-			@Override
-			public boolean onKey(View view, int keyCode, KeyEvent event) {
-				
-				if (keyCode == KeyEvent.KEYCODE_ENTER) {
-					addNewCurrentActivity();
-					return true;
-				} else {
-					return false;
-				}
-			}
-		});		
-	}
-	
-	/**
-	 * 
-	 */
-	private void setButtonListener() {
-		
-		Button button = (Button) findViewById(R.id.ButtonAdd);
-		button.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View view) {
+			if (keyCode == KeyEvent.KEYCODE_ENTER) {
 				addNewCurrentActivity();
+				return true;
+			} else {
+				return false;
 			}
 		});
 	}
@@ -337,14 +305,22 @@ public class MainActivity extends AppCompatActivity {
 	/**
 	 * 
 	 */
+	private void setButtonListener() {
+		
+		Button button = findViewById(R.id.ButtonAdd);
+		button.setOnClickListener(view -> addNewCurrentActivity());
+	}
+	
+	/**
+	 * 
+	 */
 	private void refreshEditTextAdapter() {
 		
-		AutoCompleteTextView editText = (AutoCompleteTextView) 
-			findViewById(R.id.AutoCompleteTextViewActivity);
+		AutoCompleteTextView editText = findViewById(R.id.autoCompleteTextViewActivity);
 		
 		String[] strings = suggestList.get();
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-			this, android.R.layout.simple_dropdown_item_1line, strings);
+		ArrayAdapter<String> adapter = new ArrayAdapter<>(
+				this, android.R.layout.simple_dropdown_item_1line, strings);
 		
 		editText.setAdapter(adapter);
 	}
@@ -393,7 +369,7 @@ public class MainActivity extends AppCompatActivity {
 		
 		String time = activity.getRunningTime(0);
 		
-		EditText editText = (EditText) view.findViewById(R.id.EditTextTime);
+		EditText editText = view.findViewById(R.id.EditTextTime);
 		editText.setText(time);
 	}
 	
@@ -406,8 +382,8 @@ public class MainActivity extends AppCompatActivity {
 		
 		String[] fragments = time.split(":");
 		
-		long hours   = Long.valueOf(fragments[0]).longValue(); 
-		long minutes = Long.valueOf(fragments[1]).longValue();
+		long hours   = Long.parseLong(fragments[0]);
+		long minutes = Long.parseLong(fragments[1]);
 		long seconds = 0;
 		
 		if (hours > 1000000) {
@@ -415,7 +391,7 @@ public class MainActivity extends AppCompatActivity {
 		}
 		
 		if (fragments.length > 2) {
-			seconds = Long.valueOf(fragments[2]).longValue();
+			seconds = Long.parseLong(fragments[2]);
 		}
 		
 		minutes += hours * 60;
@@ -442,30 +418,26 @@ public class MainActivity extends AppCompatActivity {
 			return;
 		}
 		
-		DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+		DialogInterface.OnClickListener listener = (dialog, which) -> {
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
+			EditText editText = view.findViewById(R.id.EditTextTime);
+			String time = editText.getText().toString();
 
-				EditText editText = (EditText) view.findViewById(R.id.EditTextTime);
-				String time = editText.getText().toString();
-				
-				try {
-					long seconds    = convertToSeconds(time);
-					long difference = seconds - activity.getAccumulated();
-					long newTotal   = totalActivity.getAccumulated() + difference;
-					
-					activity.setAccumulated(seconds);
-					totalActivity.setAccumulated(newTotal);
-					
-					DatabaseAdapter.updateActivity(MainActivity.this, activity);
-					DatabaseAdapter.updateTotalActivity(MainActivity.this, totalActivity);
-					
-					refreshAllCounters();
-					
-				} catch (Exception e) {
-					showToastErrorEditing();
-				}
+			try {
+				long seconds    = convertToSeconds(time);
+				long difference = seconds - activity.getAccumulated();
+				long newTotal   = totalActivity.getAccumulated() + difference;
+
+				activity.setAccumulated(seconds);
+				totalActivity.setAccumulated(newTotal);
+
+				DatabaseAdapter.updateActivity(MainActivity.this, activity);
+				DatabaseAdapter.updateTotalActivity(MainActivity.this, totalActivity);
+
+				refreshAllCounters();
+
+			} catch (Exception e) {
+				showToastErrorEditing();
 			}
 		};
 		
@@ -510,9 +482,7 @@ public class MainActivity extends AppCompatActivity {
 			}
 		
 			ViewParent parent = longClickedView.getParent();
-			if (parent instanceof LinearLayout) {
-				
-				LinearLayout linearLayout = (LinearLayout) parent;
+			if (parent instanceof LinearLayout linearLayout) {
 				linearLayout.removeView(longClickedView);
 			}
 
@@ -556,7 +526,7 @@ public class MainActivity extends AppCompatActivity {
 
 		MobileAds.initialize(this);
 
-		AdView mAdView = (AdView) findViewById(R.id.adView);
+		AdView mAdView = findViewById(R.id.adView);
 		AdRequest adRequest = new AdRequest.Builder().build();
 		mAdView.loadAd(adRequest);
 	}
@@ -596,25 +566,24 @@ public class MainActivity extends AppCompatActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		
-	 	switch (item.getItemId()) {
-	 	
-	    case R.id.optionsMenuItemResetAll:
-	    	resetAllTimers();
-	    	return true;
-	    	
-	    case R.id.optionsMenuItemSettings:
-	    	startActivity(new Intent(this, PreferencesActivity.class));
-	    	return true;
-/*	    	
+
+		int itemId = item.getItemId();
+		if (itemId == R.id.optionsMenuItemResetAll) {
+			resetAllTimers();
+			return true;
+		} else if (itemId == R.id.optionsMenuItemSettings) {
+			startActivity(new Intent(this, PreferencesActivity.class));
+			return true;
+		}
+
+		/*
 	    case R.id.optionsMenuItemAbout:
 	    	// implement this
 	    	return true;
-*/
-	    default:
-	    	return super.onOptionsItemSelected(item);
-	    }
-	}	
+		*/
+
+		return super.onOptionsItemSelected(item);
+	}
 
 	@Override
 	public void onCreateContextMenu
@@ -635,31 +604,27 @@ public class MainActivity extends AppCompatActivity {
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		
-		switch (item.getItemId()) {
-		
-		case R.id.contextMenuItemEditTime:
+
+		int itemId = item.getItemId();
+		if (itemId == R.id.contextMenuItemEditTime) {
 			editTime();
 			return true;
-
-		case R.id.contextMenuItemRemoveFromList:
+		} else if (itemId == R.id.contextMenuItemRemoveFromList) {
 			removeActivityFromList();
 			return true;
-
-		case R.id.contextMenuItemDeletePermanently:
+		} else if (itemId == R.id.contextMenuItemDeletePermanently) {
 			deleteActivityPermanently();
 			return true;
-
-		default:
-			return super.onContextItemSelected(item);
 		}
+
+		return super.onContextItemSelected(item);
 	}
 
 	/**
 	 * 
 	 */
 	public void onDateAvailable(String date) {
-		TextView view = (TextView) findViewById(R.id.TextViewDate);
+		TextView view = findViewById(R.id.textViewDate);
 		view.setText(date);
 	}
 
@@ -677,8 +642,8 @@ public class MainActivity extends AppCompatActivity {
 	 */
 	public void onGroupNamesAvailable(ArrayList<String> names) {
 		
-		Spinner spinner = (Spinner) findViewById(R.id.SpinnerActivityGroups);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, names);
+		Spinner spinner = findViewById(R.id.spinnerActivityGroups);
+		ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, names);
 	    
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	    spinner.setAdapter(adapter);
@@ -689,9 +654,9 @@ public class MainActivity extends AppCompatActivity {
 			protected void onItemSelected(int position) {
 				
 				//TODO: duplicate code
-				currentGroupId = Integer.valueOf(position);
+				currentGroupId = position;
 				View view = groups.get(currentGroupId);
-				FrameLayout layout = (FrameLayout) findViewById(R.id.FrameLayoutGroups);
+				FrameLayout layout = findViewById(R.id.frameLayoutGroups);
 				layout.removeAllViews();
 				layout.addView(view);
 				
@@ -703,7 +668,7 @@ public class MainActivity extends AppCompatActivity {
 	    for (int i = 0, length = names.size(); i < length; i++) {
 	    	
 	    	View view = View.inflate(this, R.layout.activities_layout, null);
-			groups.put(Integer.valueOf(i), view);
+			groups.put(i, view);
 		}
 	}
 
@@ -713,13 +678,13 @@ public class MainActivity extends AppCompatActivity {
 	 */
 	public void onCurrentGroupPositionAvailable(int position) {
 	
-		Spinner spinner = (Spinner) findViewById(R.id.SpinnerActivityGroups);
+		Spinner spinner = findViewById(R.id.spinnerActivityGroups);
 		spinner.setSelection(position);
 		
 		//TODO: duplicate code
-		currentGroupId = Integer.valueOf(position);
+		currentGroupId = position;
 		View view = groups.get(currentGroupId);
-		FrameLayout layout = (FrameLayout) findViewById(R.id.FrameLayoutGroups);
+		FrameLayout layout = findViewById(R.id.frameLayoutGroups);
 		layout.removeAllViews();
 		layout.addView(view);
 	}

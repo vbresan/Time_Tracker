@@ -3,13 +3,13 @@ package biz.binarysolutions.timetracker.data;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import biz.binarysolutions.timetracker.R;
 
 /**
  * 
  *
  */
-@SuppressWarnings("serial")
 public class TrackableActivity extends DisplayableActivity {
 	
 	/**
@@ -18,22 +18,12 @@ public class TrackableActivity extends DisplayableActivity {
 	 */
 	private void setHourglassVisible(boolean visible) {
 		
-		ImageView imageView = (ImageView) view.findViewById(R.id.ImageViewHourGlass);
+		ImageView imageView = (ImageView) view.findViewById(R.id.imageViewHourGlass);
 		if (imageView != null) {
 			
 			int visibility = visible ? View.VISIBLE : View.INVISIBLE;
 			imageView.setVisibility(visibility);
 		}
-	}
-
-	/**
-	 * 
-	 * @param name
-	 * @param accumulated
-	 * @param startedAt
-	 */
-	protected TrackableActivity(String name, long accumulated, long startedAt) {
-		super(name, accumulated, startedAt);
 	}
 
 	/**
@@ -52,8 +42,8 @@ public class TrackableActivity extends DisplayableActivity {
 	void setView(android.app.Activity appActivity) {
 		
 		view = View.inflate(appActivity, R.layout.activity, null);
-		
-		TextView textView = (TextView) view.findViewById(R.id.TextViewName);
+
+		TextView textView = view.findViewById(R.id.textViewName);
 		textView.setText(super.getName());
 		
 		if (getStartedAt() > 0) {
@@ -109,7 +99,7 @@ public class TrackableActivity extends DisplayableActivity {
 		
 		String text = getRunningTime(time); 
 		
-		TextView textView = (TextView) view.findViewById(R.id.TextViewCounter);
+		TextView textView = (TextView) view.findViewById(R.id.textViewCounter);
 		textView.setText(text);
 	}
 

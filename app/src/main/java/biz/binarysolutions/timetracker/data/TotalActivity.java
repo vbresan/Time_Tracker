@@ -1,42 +1,47 @@
 package biz.binarysolutions.timetracker.data;
 
-import android.content.res.Resources;
 import android.widget.TextView;
+
+import com.google.android.material.color.MaterialColors;
+
 import biz.binarysolutions.timetracker.R;
 
 /**
  * 
  *
  */
-@SuppressWarnings("serial")
 public class TotalActivity extends DisplayableActivity {
-	
+
+	private TextView textViewCounter;
+
+	/**
+	 *
+	 * @param isTracking
+	 * @return
+	 */
+	private int getColorResource(boolean isTracking) {
+
+		if (isTracking) {
+			return com.google.android.material.R.attr.colorError;
+		} else {
+			return com.google.android.material.R.attr.colorOnSurface;
+		}
+	}
+
 	/**
 	 * 
 	 * @param isTracking
 	 */
 	private void setTrackingColor(boolean isTracking) {
-		
-		Resources resources = view.getContext().getResources();
-		int color;
-		if (isTracking) {
-			color = resources.getColor(R.color.Red);
-		} else {
-			color = resources.getColor(R.color.BlackColor);
+
+		if (textViewCounter == null) {
+			return;
 		}
 
-		TextView textView = (TextView) view.findViewById(R.id.TextViewCounter);
-		textView.setTextColor(color);
-	}
-	
-	/**
-	 * 
-	 * @param name
-	 * @param accumulated
-	 * @param startedAt
-	 */
-	protected TotalActivity(String name, long accumulated, long startedAt) {
-		super(name, accumulated, startedAt);
+		int resource = getColorResource(isTracking);
+		int color    = MaterialColors.getColor(textViewCounter, resource);
+
+		textViewCounter.setTextColor(color);
 	}
 
 	/**
@@ -49,8 +54,8 @@ public class TotalActivity extends DisplayableActivity {
 
 	@Override
 	void setView(android.app.Activity activity) {
-		view = activity.findViewById(R.id.LinearLayoutTotalActivity);
-		
+		textViewCounter = activity.findViewById(R.id.textViewTotalCounter);
+
 		if (getStartedAt() > 0) {
 			setTrackingColor(true);
 		}
@@ -71,10 +76,12 @@ public class TotalActivity extends DisplayableActivity {
 
 	@Override
 	public void refreshTimer(long time) {
+
+		if (textViewCounter == null) {
+			return;
+		}
 		
-		String text = getRunningTime(time); 
-		
-		TextView textView = (TextView) view.findViewById(R.id.TextViewCounter);
-		textView.setText(text);		
+		String text = getRunningTime(time);
+		textViewCounter.setText(text);
 	}
 }

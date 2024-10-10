@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="ic_launcher_background">#6750A4</color>
-
-    <color name="BackgroundStartColor">#E7EBFF</color>
-    <color name="BackgroundEndColor">#ACC6EE</color>
-    
-    <color name="ActivityColor">#638EDE</color>
-    <color name="BlackColor">#000000</color>
-    <color name="WhiteColor">#FFFFFF</color>
-    <color name="Red">#DE6563</color>
-    <color name="TransparentColor">#00000000</color>
 </resources>

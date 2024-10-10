@@ -1,49 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@layout/rounded"
     android:clickable="true"
-    android:focusable="true" >
+    android:focusable="true"
+    >
 
+    <!--
+        TODO: the warning says that the view is unnecessary. However, when
+            parent is removed, the layout margin is not shown.
+            Recheck once the layout is simplified.
+    -->
     <LinearLayout
-        android:id="@+id/LinearLayout01"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:padding="10dp" >
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/rounded"
+        android:orientation="horizontal"
+        >
 
         <TextView
-            android:id="@+id/TextViewName"
-            android:layout_width="fill_parent"
+            android:id="@+id/textViewName"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1.0"
-            android:textColor="@color/WhiteColor"
-            android:textSize="20dp"
-            android:textStyle="bold" >
-        </TextView>
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+        />
 
         <TextView
-            android:id="@+id/TextViewCounter"
+            android:id="@+id/textViewCounter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/StartCount"
-            android:textColor="@color/WhiteColor"
-            android:textSize="20dp"
-            android:textStyle="bold" >
-        </TextView>
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+        />
 
         <ImageView
-            android:id="@+id/ImageViewHourGlass"
+            android:id="@+id/imageViewHourGlass"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="right|center_vertical"
+            android:layout_gravity="end|center_vertical"
             android:background="@drawable/hour_glass"
-            android:visibility="invisible" >
-        </ImageView>
+            android:visibility="invisible"
+            android:contentDescription="@string/HourglassIcon"
+        />
     </LinearLayout>
 
 </LinearLayout>

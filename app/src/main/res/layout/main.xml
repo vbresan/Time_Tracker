@@ -2,19 +2,18 @@
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:ads="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" 
-    android:background="@color/BackgroundStartColor"
+	android:padding="16dp"
     >
 
 	<LinearLayout
-		android:id="@+id/LinearLayoutAd01"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:minHeight="50dp"
 		android:gravity="center"
-		android:background="@color/BackgroundStartColor"
 		>
 
 		<com.google.android.gms.ads.AdView
@@ -26,129 +25,104 @@
 		/>
 	</LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal" 
-        android:focusable="true" 
-        android:focusableInTouchMode="true"
-        android:layout_width="0px" 
-        android:layout_height="0px"
-    	android:id="@+id/LinearLayoutDummy"
-    />
+	<TextView
+		android:id="@+id/textViewDate"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:textAppearance="@style/TextAppearance.AppCompat.Large"
+		android:padding="16dp"
+		android:gravity="center"
+	/>
 
-    <LinearLayout android:id="@+id/LinearLayout01" 
-    	android:layout_height="wrap_content" 
-    	android:padding="5dp" 
-    	android:layout_width="fill_parent" 
-    	android:gravity="center_horizontal"
-    	>
-
-    	<TextView android:layout_width="wrap_content" 
-    		android:layout_height="wrap_content" 
-    		android:textColor="@color/BlackColor" 
-    		android:textStyle="bold" 
-    		android:id="@+id/TextViewDate" 
-    		android:textSize="25sp"
-    	/>
-	</LinearLayout>
-	
-	<Spinner android:layout_height="wrap_content"
-		android:layout_width="fill_parent" 
-		android:id="@+id/SpinnerActivityGroups"
+	<Spinner
+		android:id="@+id/spinnerActivityGroups"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		style="@style/Widget.AppCompat.Spinner.Underlined"
 	/>
 	
-	<FrameLayout android:layout_height="fill_parent" 
-		android:layout_width="fill_parent" 
+	<FrameLayout
+		android:id="@+id/frameLayoutGroups"
+		android:layout_height="0dp"
+		android:layout_width="match_parent"
 		android:layout_weight="1.0"
-		android:id="@+id/FrameLayoutGroups"
 	/>
 	
-    <LinearLayout android:layout_height="wrap_content" 
+    <LinearLayout
+		android:id="@+id/linearLayoutTotalActivity"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
     	android:padding="5dp" 
-    	android:layout_width="fill_parent" 
-    	android:id="@+id/LinearLayoutTotalActivity"
     	>
     	
-    	<TextView android:textColor="@color/BlackColor" 
-    		android:id="@+id/TextView02" 
-    		android:layout_height="wrap_content" 
+    	<TextView
+    		android:layout_height="wrap_content"
     		android:layout_width="wrap_content" 
     		android:textSize="20sp" 
     		android:textStyle="bold" 
     		android:text="@string/Group"
-    	android:visibility="invisible"/>
+    		android:visibility="invisible"
+		/>
     	
-    	<TextView android:textColor="@color/BlackColor" 
-    		android:id="@+id/TextView03" 
-    		android:layout_height="wrap_content" 
+    	<TextView
+    		android:layout_height="wrap_content"
     		android:layout_width="wrap_content" 
     		android:textSize="20sp" 
-    		android:paddingLeft="10dp" 
+    		android:paddingStart="10dp"
     		android:textStyle="bold" 
     		android:text="@string/StartCount"
-    	android:visibility="invisible"/>
+    		android:visibility="invisible"
+			tools:ignore="RtlSymmetry"
+		/>
     	
-    	<LinearLayout android:id="@+id/LinearLayout04" 
-    		android:layout_height="wrap_content" 
-    		android:layout_width="fill_parent" 
+    	<LinearLayout
+    		android:layout_height="wrap_content"
+    		android:layout_width="0dp"
     		android:orientation="horizontal" 
     		android:layout_weight="1.0"
     	/>
     	
-    	<TextView android:id="@+id/TextView01" 
-    		android:layout_width="wrap_content" 
-    		android:layout_height="wrap_content" 
-    		android:textColor="@color/BlackColor" 
-    		android:textSize="20sp" 
-    		android:textStyle="bold" 
+    	<TextView
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+			android:textAppearance="@style/TextAppearance.AppCompat.Large"
     		android:text="@string/Total"
     	/>
     	
-    	<TextView android:layout_width="wrap_content" 
-    		android:layout_height="wrap_content" 
-    		android:textColor="@color/BlackColor" 
-    		android:textSize="20sp" 
-    		android:textStyle="bold" 
-    		android:paddingLeft="10dp" 
-    		android:text="@string/StartCount" 
-    		android:id="@+id/TextViewCounter"
-    	/>
-    	
+    	<TextView
+			android:id="@+id/textViewTotalCounter"
+			android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+			android:textAppearance="@style/TextAppearance.AppCompat.Large"
+    		android:paddingStart="10dp"
+    		android:text="@string/StartCount"
+			tools:ignore="RtlSymmetry"
+		/>
     </LinearLayout>
     
-    
-    <LinearLayout
-		android:id="@+id/LinearLayout02"
+	<LinearLayout
 		android:layout_height="wrap_content"
-		android:orientation="vertical"
 		android:layout_width="fill_parent"
+		android:orientation="horizontal"
 		>
 
-		<LinearLayout
-			android:id="@+id/LinearLayout03"
+		<AutoCompleteTextView
+			android:id="@+id/autoCompleteTextViewActivity"
 			android:layout_height="wrap_content"
-			android:background="@layout/background"
 			android:layout_width="fill_parent"
-			android:orientation="horizontal"
-			>
+			android:layout_weight="1.0"
+			android:layout_gravity="center_vertical"
+			android:hint="@string/Activity"
+			android:lines="1"
+			android:completionThreshold="1"
+		/>
 
-			<AutoCompleteTextView
-				android:layout_height="wrap_content"
-				android:layout_width="fill_parent"
-				android:layout_weight="1.0"
-				android:layout_gravity="center_vertical"
-				android:hint="@string/Activity"
-				android:lines="1"
-				android:id="@+id/AutoCompleteTextViewActivity"
-				android:completionThreshold="1"
-			/>
-
-			<Button
-				android:layout_height="wrap_content"
-				android:text="@string/Add"
-				android:layout_width="fill_parent"
-				android:layout_weight="2.0"
-				android:id="@+id/ButtonAdd"
-			/>
-		</LinearLayout>
+		<Button
+			android:id="@+id/ButtonAdd"
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:layout_weight="2.0"
+			android:text="@string/Add"
+		/>
 	</LinearLayout>
 </LinearLayout>
