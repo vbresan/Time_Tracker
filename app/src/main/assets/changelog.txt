@@ -1,6 +1,7 @@
-5.0 (2024.10.xx)
+5.0 (2024.10.16)
 
 * targeting SDK version 34
+* complete redesign using Material Design 3 and Dynamic Colors
 
 
 4.0.1 (2019.08.02)
