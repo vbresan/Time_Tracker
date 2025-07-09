@@ -13,7 +13,7 @@ ERROR @ line 13: <feBlend> is not supported
 ERROR @ line 14: <feBlend> is not supported
 ```
 
-To address this issue, `new.png` was created using Inkscape. Android Studio 
+To address this issue, `new.svg` was created using Inkscape. Android Studio 
 still shows errors:
 
 ```
@@ -24,5 +24,5 @@ ERROR @ line 40: <feGaussianBlur> is not supported
 Unlike the previous attempt, the shadow is now visible, though it lacks the 
 blur effect.
 
-For more details, see this unanswered question on StackOverflow: 
+For more details, see this unanswered question on StackOverflow:  
 https://stackoverflow.com/questions/56630125/i-got-message-import-svg-with-error-fegaussianblur-is-not-supported
