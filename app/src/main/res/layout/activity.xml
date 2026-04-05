@@ -47,7 +47,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="end|center_vertical"
-            android:background="@drawable/hour_glass"
+            android:background="@drawable/hourglass"
             android:visibility="invisible"
             android:contentDescription="@string/HourglassIcon"
         />
