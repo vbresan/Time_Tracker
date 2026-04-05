@@ -1,0 +1,4 @@
+Date:    2025.07.09
+Version: 5.0.1
+Changes:
+* targeting SDK version 35

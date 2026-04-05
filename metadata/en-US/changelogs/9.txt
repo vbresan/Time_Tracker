@@ -1,0 +1,5 @@
+Date:    2024.10.16
+Version: 5.0
+Changes:
+* targeting SDK version 34
+* complete redesign using Material Design 3 and Dynamic Colors

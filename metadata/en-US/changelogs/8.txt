@@ -1,0 +1,4 @@
+Date:    2019.08.02
+Version: 4.0.1
+Changes:
+* moving ad to the top of the screen

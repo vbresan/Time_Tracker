@@ -1,0 +1,5 @@
+Date:    2013.06.30
+Version: 3.0.1
+Changes:
+* showing title bar
+* handling number overflow

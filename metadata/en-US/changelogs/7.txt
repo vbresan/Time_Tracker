@@ -1,0 +1,4 @@
+Date:    2019.08.01
+Version: 4.0
+Changes:
+* removing Flurry analytics
