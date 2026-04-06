@@ -10,4 +10,4 @@
 /app/release/
 /gradlew
 /gradlew.bat
-/app/src/main/res/values/donottranslate_secrets.xml
+*secrets*

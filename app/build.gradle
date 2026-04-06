@@ -2,7 +2,7 @@ apply plugin: "com.android.application"
 
 android {
     namespace "biz.binarysolutions.timetracker"
-    compileSdk 35
+    compileSdk = 36
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -13,8 +13,8 @@ android {
         applicationId "biz.binarysolutions.timetracker"
         minSdkVersion 21
         targetSdkVersion 35
-        versionCode 10
-        versionName "5.0.1"
+        versionCode 11
+        versionName "5.0.2"
 
         setProperty("archivesBaseName", "$applicationId-$versionName")
     }
@@ -25,12 +25,26 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-project.txt"
         }
     }
+
+    flavorDimensions = ["distribution"]
+    productFlavors {
+        google {
+            dimension "distribution"
+        }
+        free {
+            dimension "distribution"
+            dependenciesInfo {
+                includeInApk = false
+                includeInBundle = false
+            }
+        }
+    }
 }
 
 dependencies {
-    implementation "com.google.android.material:material:1.12.0"
+    implementation "com.google.android.material:material:1.13.0"
     implementation "androidx.preference:preference:1.2.1"
 
     // version 24.0.0+ requires min SDK 23
-    implementation "com.google.android.gms:play-services-ads:23.6.0"
+    googleImplementation "com.google.android.gms:play-services-ads:23.6.0"
 }

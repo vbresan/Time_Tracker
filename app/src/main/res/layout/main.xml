@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:ads="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:orientation="vertical"
     android:layout_width="fill_parent"
@@ -9,21 +8,7 @@
 	android:padding="16dp"
     >
 
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:minHeight="50dp"
-		android:gravity="center"
-		>
-
-		<com.google.android.gms.ads.AdView
-			android:id="@+id/adView"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			ads:adSize="BANNER"
-			ads:adUnitId="@string/admob_banner_id"
-		/>
-	</LinearLayout>
+	<include layout="@layout/top_bar" />
 
 	<TextView
 		android:id="@+id/textViewDate"

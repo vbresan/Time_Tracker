@@ -22,7 +22,7 @@ public class TotalActivity extends DisplayableActivity {
 	private int getColorResource(boolean isTracking) {
 
 		if (isTracking) {
-			return com.google.android.material.R.attr.colorError;
+			return androidx.appcompat.R.attr.colorError;
 		} else {
 			return com.google.android.material.R.attr.colorOnSurface;
 		}

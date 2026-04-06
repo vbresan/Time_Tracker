@@ -28,9 +28,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.color.DynamicColors;
 
 import java.util.ArrayList;
@@ -519,18 +516,6 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	/**
-	 *
-	 */
-	private void setAds() {
-
-		MobileAds.initialize(this);
-
-		AdView mAdView = findViewById(R.id.adView);
-		AdRequest adRequest = new AdRequest.Builder().build();
-		mAdView.loadAd(adRequest);
-	}
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -546,7 +531,7 @@ public class MainActivity extends AppCompatActivity {
 	    setEditTextOnKeyListener();
 	    setButtonListener();
 
-		setAds();
+		new FlavorSpecific(this).initialize();
 	}
 
 	@Override
