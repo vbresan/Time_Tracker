@@ -1,4 +1,4 @@
-# Time tracker
+# Time Tracker
 _Time Tracker keeps track of the time you spend on any task._
 
 ## Screenshots
